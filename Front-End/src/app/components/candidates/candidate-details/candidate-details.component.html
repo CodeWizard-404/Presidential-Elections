@@ -1,0 +1,70 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <!-- Candidate Details Section -->
+            <div class="card">
+                <!-- Favorite Star -->
+
+                <button class="btn  position-absolute top-0 end-0 m-2 text-warning favorite-icon"
+                    [class.favorite]="candidateId.isFavorite" (click)="toggleFavorite(candidateId)">
+                    <span *ngIf="!candidateId.isFavorite"><i class="bi bi-bookmark"></i></span>
+                    <span *ngIf="candidateId.isFavorite"><i class="bi bi-bookmark-fill"></i></span>
+                </button>
+                <div class="card-body text-center">
+                    <!-- Profile Picture -->
+                    <div class="text-center">
+                        <img [src]="candidateId.photoUrl" alt="{{ candidateId.name }}"
+                            class="rounded-circle profile-pic mb-3" />
+                    </div>
+                    <!-- Candidate Name & Party -->
+                    <h2 class="card-title">{{ candidateId.name }}</h2>
+                    <p class="text-muted">{{ candidateId.party }}</p>
+
+                    <!-- Bio -->
+                    <p class="card-text">{{ candidateId.bio }}</p>
+
+                    <!-- Voting Button -->
+                    <button class="btn btn-primary mb-3" (click)="vote(candidateId)">
+                        Vote for {{ candidateId.name }}
+                    </button>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section mt-0">
+                        <h4 class="mb-1 text-muted">Comments</h4>
+
+                        <!-- Comments Display -->
+                        <div *ngFor="let comment of candidateId.comments" class="mb-1">
+                            <div class="card border-light rounded-3 shadow-sm">
+                                <div class="card-body pl-3 pb-0 pt-0">
+                                    <div class="d-flex">
+                                        <!-- Avatar -->
+                                        <div class="flex-shrink-0">
+                                            <img src="https://via.placeholder.com/35" alt="User Avatar"
+                                                class="rounded-circle">
+                                        </div>
+                                        <!-- Comment Content -->
+                                        <div class="ms-3 ">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <p class="mb-0 fw-semibold text-dark">{{ comment.username }}</p>
+                                                <small class="text-muted">{{ comment.date | date:'short' }}</small>
+                                            </div>
+                                            <p class="text-dark mb-0">{{ comment.text }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Comment input -->
+                        <div class="input-group mt-3">
+                            <textarea class="form-control form-control-sm" id="commentInput" placeholder="Add a comment"
+                                [(ngModel)]="newComment" rows="2"></textarea>
+                            <button class="btn btn-primary" (click)="addComment(candidateId)">
+                                <i class="bi bi-send"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

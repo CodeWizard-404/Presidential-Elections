@@ -1,0 +1,60 @@
+/* Container Styling */
+.container {
+    max-width: 960px;
+    margin-top: 50px;
+  }
+  
+  /* Profile Picture */
+  .profile-header {
+    text-align: center;
+  }
+  
+  .profile-pic {
+    width: 150px;
+    height: 150px;
+    border: 2px solid #ddd;
+    object-fit: cover;
+  }
+  
+  /* Profile Information Styling */
+  .profile-info {
+    padding-left: 30px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .profile-details p {
+    font-size: 1rem;
+  }
+  
+  .profile-details strong {
+    font-weight: 600;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  /* Form Styling */
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  textarea {
+    min-height: 100px;
+  }
+  
+  /* Button Styling */
+  .btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+  
+  button:disabled {
+    opacity: 0.7;
+  }
+  

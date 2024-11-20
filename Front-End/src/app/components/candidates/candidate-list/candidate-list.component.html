@@ -1,0 +1,103 @@
+<div class="container mt-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <!-- Search Bar -->
+        <input type="text" class="form-control w-50" placeholder="Search candidates..." [(ngModel)]="searchTerm" />
+        <!-- Sorter as Icon -->
+        <div class="dropdown">
+            <button class="btn btn-light" type="button" (click)="toggleDropdown()">
+                <i class="bi bi-filter"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-start" [class.show]="dropdownOpen">
+                <li>
+                    <a class="dropdown-item" (click)="sort('name')">Sort by Name</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="sort('party')">Sort by Party</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" (click)="sort('favorites')">Sort by Favorites</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Candidate Cards -->
+    <div class="row">
+        <div class="col-md-4 mb-4" *ngFor="let candidate of candidates | filter: searchTerm | sort: selectedSortOption">
+            <div class="card position-relative">
+                <!-- Favorite Star -->
+                <button class="btn  position-absolute top-0 end-0 m-2 text-warning favorite-icon"
+                    [class.favorite]="candidate.isFavorite" (click)="toggleFavorite(candidate)">
+                    <span *ngIf="!candidate.favorites"><i class="bi bi-bookmark"></i></span>
+                    <span *ngIf="candidate.favorites"><i class="bi bi-bookmark-fill"></i></span>
+                </button>
+                <div class="text-center mt-3">
+                    <img [src]="candidate.photoUrl" alt="{{ candidate.name }}" class="rounded-circle profile-pic" />
+                </div>
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-1">{{ candidate.name }}</h5>
+                    <p class="text-muted mb-2">{{ candidate.party }}</p>
+                    <p class="card-text small text-truncate">{{ candidate.bio }}</p>
+                    <button class="btn btn-primary btn-sm" (click)="openModal(candidate)">Details</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal for Candidate Details -->
+<div class="modal fade" id="candidateModal" tabindex="-1" aria-labelledby="candidateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header border-0">
+                <h5 class="modal-title text-dark" id="candidateModalLabel">{{ selectedCandidate?.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center mb-1">
+                    <img [src]="selectedCandidate?.photoUrl" alt="{{ selectedCandidate?.name }}" class=" rounded  profile-pic mb-3" style="width: 200px; height:260px; border: 1px solid #007bff; transition: transform 0.3s;">
+                </div>
+                <div class="d-flex justify-content-center mb-4">
+                    <button class="btn btn-outline-primary px-4 py-2" (click)="vote(selectedCandidate)">
+                        Vote for {{ selectedCandidate?.name }}
+                    </button>
+                </div>
+                <h4 class="text-primary">{{ selectedCandidate?.party }}</h4>
+                <p class="text-muted">{{ selectedCandidate?.bio }}</p>
+
+
+                <div class="comments-section mt-4">
+                    <h5 class="mb-3 text-muted">Comments</h5>
+                    <div *ngFor="let comment of selectedCandidate?.comments" class="mb-1">
+                        <div class="card border-Secondary shadow-sm rounded-3 p-1">
+                            <div class="card-muted p-0">
+                                <div class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <img src="https://via.placeholder.com/40" alt="User Avatar" class="rounded-circle">
+                                    </div>
+                                    <div class="ms-3 pt-0 w-100">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <p class="mb-0 fw-semibold text-dark">{{ comment.username }}</p>
+                                            <small class="text-muted">{{ comment.date | date:'short' }}</small>
+                                        </div>
+                                        <p class="text-dark mb-0">{{ comment.text }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group  rounded-3">
+                        <textarea class="form-control form-control-sm rounded-3" id="commentInput" placeholder="Add a comment" [(ngModel)]="newComment" rows="2"></textarea>
+                        <button class="btn btn-primary rounded-3" (click)="addComment(selectedCandidate)">
+                            <i class="bi bi-send"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
