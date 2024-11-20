@@ -24,6 +24,8 @@ import { CandidateListComponent } from './components/candidates/candidate-list/c
 import { CandidateDetailsComponent } from './components/candidates/candidate-details/candidate-details.component';
 import { ResultsComponent } from './components/results/results/results.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { AddCandidateComponent } from './components/admin/add-candidate/add-candidate.component';
+import { EditCandidateComponent } from './components/admin/edit-candidate/edit-candidate.component';
 
 import { FilterPipe } from './pipes/search.pipe';
 import { SortPipe } from './pipes/sort.pipe';
@@ -32,6 +34,7 @@ import { SortPipe } from './pipes/sort.pipe';
 // Import the RouterModule with your routes
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routes } from './app.routes';
+
 
 @NgModule({
   declarations: [
@@ -50,7 +53,9 @@ import { AppRoutingModule, routes } from './app.routes';
 
     FilterPipe,
     SortPipe,
-    DashboardComponent
+    DashboardComponent,
+    AddCandidateComponent,
+    EditCandidateComponent
   ],
   imports: [
     BrowserModule,

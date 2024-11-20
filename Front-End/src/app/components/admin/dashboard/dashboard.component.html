@@ -23,7 +23,7 @@
                     <h5 class="mb-0">Manage Candidates</h5>
                 </div>
                 <div class="card-body">
-                    <button class="btn btn-primary mb-3" (click)="addCandidate()">Add New Candidate</button>
+                    <button class="btn btn-primary mb-3" [routerLink]="['/add-candidate']">Add New Candidate</button>
 
                     <div *ngIf="candidates.length === 0" class="alert alert-info">
                         No candidates available.
@@ -42,10 +42,10 @@
                                 <td>{{ candidate.name }}</td>
                                 <td>{{ candidate.position }}</td>
                                 <td>
-                                    <button class="btn btn-warning btn-sm"
-                                        (click)="editCandidate(candidate)">Edit</button>
-                                    <button class="btn btn-danger btn-sm"
-                                        (click)="deleteCandidate(candidate)">Delete</button>
+                                    <button class="btn btn-secondary btn-sm" [routerLink]="['/edit-candidate',candidate.id]"><i
+                                            class="bi bi-pencil-square"></i></button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteCandidate(candidate)"><i
+                                            class="bi bi-trash-fill"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -66,3 +66,28 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>User</th>
+                                <th>Comment</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let comment of comments">
+                                <td>{{ comment.user }}</td>
+                                <td>{{ comment.text }}</td>
+                                <td>{{ comment.status }}</td>
+                                <td>
+                                    <button class="btn btn-success btn-sm"
+                                        (click)="approveComment(comment)">Approve</button>
+                                    <button class="btn btn-danger btn-sm"
+                                        (click)="deleteComment(comment)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

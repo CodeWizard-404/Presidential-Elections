@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <h4>Edit Candidate</h4>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="onSubmit()" #candidateForm="ngForm">
+                <!-- Candidate Name -->
+                <div class="mb-3">
+                    <label for="name" class="form-label">Candidate Name</label>
+                    <input type="text" id="name" class="form-control" [(ngModel)]="candidate.name" name="name"
+                        required />
+                </div>
+
+                <!-- Position -->
+                <div class="mb-3">
+                    <label for="position" class="form-label">Position</label>
+                    <input type="text" id="position" class="form-control" [(ngModel)]="candidate.position"
+                        name="position" required />
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary" [disabled]="!candidateForm.form.valid">Update
+                    Candidate</button>
+                <a [routerLink]="['/admin/dashboard']" class="btn btn-secondary ms-2">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,8 @@ import { ResultsComponent } from './components/results/results/results.component
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
 import { ErrorComponent } from './components/main/error/error.component';
 import { NgModule } from '@angular/core';
+import { AddCandidateComponent } from './components/admin/add-candidate/add-candidate.component';
+import { EditCandidateComponent } from './components/admin/edit-candidate/edit-candidate.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -19,6 +21,8 @@ export const routes: Routes = [
   { path: 'candidate/:id', component: CandidateDetailsComponent },
   { path: 'results', component: ResultsComponent },
   { path: 'admin/dashboard', component: DashboardComponent },
+  { path: 'add-candidate', component: AddCandidateComponent },
+  { path: 'edit-candidate/:id', component: EditCandidateComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', title: 'Erreur', component: ErrorComponent }
 ];
