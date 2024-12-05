@@ -4,9 +4,10 @@ const Vote = require('../models/Vote');
 exports.castVote = async (req, res) => {
   try {
     const existingVote = await Vote.findOne({
-      userId: req.user._id,
-      electionId: req.body.electionId, 
+      userId: req.body.userId,  // Change from req.user._id to req.body.userId
+      electionId: req.body.electionId,
     });
+    
 
     if (existingVote) {
       return res.status(400).json({ message: 'You have already voted in this election.' });
@@ -14,7 +15,7 @@ exports.castVote = async (req, res) => {
 
     const voteData = {
       ...req.body,
-      userId: req.user._id,
+      userId: req.body.userId,
     };
 
     const vote = new Vote(voteData);

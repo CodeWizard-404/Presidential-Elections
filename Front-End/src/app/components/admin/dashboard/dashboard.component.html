@@ -33,19 +33,17 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Position</th>
+                                <th>Party</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let candidate of candidates">
                                 <td>{{ candidate.name }}</td>
-                                <td>{{ candidate.position }}</td>
+                                <td>{{ candidate.party }}</td>
                                 <td>
-                                    <button class="btn btn-secondary btn-sm" [routerLink]="['/edit-candidate',candidate.id]"><i
-                                            class="bi bi-pencil-square"></i></button>
-                                    <button class="btn btn-danger btn-sm" (click)="deleteCandidate(candidate)"><i
-                                            class="bi bi-trash-fill"></i></button>
+                                    <button class="btn btn-secondary btn-sm" [routerLink]="['/edit-candidate', candidate._id]"><i class="bi bi-pencil-square"></i></button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteCandidate(candidate._id!)"><i class="bi bi-trash-fill"></i></button>
                                 </td>
                             </tr>
                         </tbody>
@@ -56,7 +54,7 @@
     </div>
 
     <!-- Comments Management Section -->
-    <div class="row mt-4">
+    <!--<div class="row mt-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
@@ -68,20 +66,16 @@
                             <tr>
                                 <th>User</th>
                                 <th>Comment</th>
-                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let comment of comments">
-                                <td>{{ comment.user }}</td>
-                                <td>{{ comment.text }}</td>
-                                <td>{{ comment.status }}</td>
+                                <td>{{ comment.userId }}</td>
+                                <td>{{ comment.content }}</td>
                                 <td>
-                                    <button class="btn btn-success btn-sm"
-                                        (click)="approveComment(comment)">Approve</button>
-                                    <button class="btn btn-danger btn-sm"
-                                        (click)="deleteComment(comment)">Delete</button>
+                                    <button class="btn btn-success btn-sm" (click)="approveComment(comment)">Approve</button>
+                                    <button class="btn btn-danger btn-sm" (click)="deleteComment(comment)">Delete</button>
                                 </td>
                             </tr>
                         </tbody>
@@ -89,5 +83,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 </div>

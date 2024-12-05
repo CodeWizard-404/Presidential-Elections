@@ -114,3 +114,21 @@ input.form-control {
 .modal-header {
     border-bottom: 1px solid #e0e0e0;
 }
+
+li{
+    list-style-type: none;
+}
+.candidate-card {
+    /* Default card styles */
+    padding: 20px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .voted-card {
+    background-color: #e0f7fa;  /* Light blue background for the voted candidate */
+    border-color: #00796b;  /* Darker border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  

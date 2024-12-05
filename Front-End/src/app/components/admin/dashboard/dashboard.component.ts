@@ -1,69 +1,122 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CandidateService } from '../../../services/candidate.service';
+import { CommentService } from '../../../services/comment.service';
+import { ElectionService } from '../../../services/election.service';
+import { Candidate } from '../../../classes/candidate';
+import { Comment } from '../../../classes/comment';
+import { ResultService } from '../../../services/results.service';
+import { CommonModule } from '@angular/common';
+import { User } from '../../../classes/user';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
   imports: [CommonModule,RouterModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css'
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  totalUsers: number = 1200;
-  totalVotes: number = 5000;
-  totalCandidates: number = 25;
 
-  // Added id for each candidate
-  candidates = [
-    { id: 1, name: 'John Doe', position: 'President' },
-    { id: 2, name: 'Jane Smith', position: 'Secretary' },
-    { id: 3, name: 'Sam Brown', position: 'Treasurer' }
-  ];
+  candidates: Candidate[] = [];
+  users: User[] = [];
+  comments: Comment[] = [];
+  totalUsers: number = 0;
+  totalVotes: number = 0;
+  totalCandidates: number = 0;
+  
+  
 
-  comments = [
-    { user: 'User1', text: 'Great candidate!', status: 'Pending' },
-    { user: 'User2', text: 'Needs more experience.', status: 'Approved' },
-    { user: 'User3', text: 'I support this candidate!', status: 'Pending' }
-  ];
-
-  constructor() {}
+  constructor(
+    private candidateService: CandidateService,
+    private commentService: CommentService,
+    private electionService: ElectionService,
+    private resultService: ResultService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    // Fetch data for platform stats, candidates, and comments
-    // Example: this.fetchPlatformStats(), this.fetchCandidates(), this.fetchComments()
+    this.fetchCandidates();
+    this.fetchComments();
+    this.getPlatformStats();
   }
 
-  addCandidate(): void {
-    // Logic to add a new candidate (can be replaced with actual form or modal)
-    console.log('Add new candidate');
+  fetchCandidates(): void {
+    this.candidateService.getAllCandidates().subscribe(
+      (candidates) => {
+        this.candidates = candidates;
+        this.totalCandidates = candidates.length;
+      },
+      (error) => {
+        console.error('Error fetching candidates:', error);
+      }
+    );
   }
 
-  editCandidate(candidate: any): void {
-    // Logic to edit a selected candidate
-    console.log('Edit candidate:', candidate);
+  fetchComments(): void {
+    this.commentService.getCommentsByCandidate('all').subscribe(
+      (comments) => {
+        this.comments = comments;
+      },
+      (error) => {
+        console.error('Error fetching comments:', error);
+      }
+    );
   }
 
-  deleteCandidate(candidate: any): void {
-    // Logic to delete a selected candidate
-    const index = this.candidates.indexOf(candidate);
-    if (index !== -1) {
-      this.candidates.splice(index, 1);
-    }
-    console.log('Deleted candidate:', candidate);
+  getPlatformStats(): void {
+    // Fetch elections data
+    this.electionService.getAllElections().subscribe((elections) => {
+      this.totalVotes = elections.reduce((total, election) => total + election.voteCount, 0);
+    });
+
+    // Fetch users data
+    this.userService.getAllUsers().subscribe(
+      (users) => {
+        this.users = users;
+        this.totalUsers = users.length-1;  // Now it's correctly set
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
   }
 
-  approveComment(comment: any): void {
-    // Approve comment
-    comment.status = 'Approved';
-    console.log('Approved comment:', comment);
+
+
+  editCandidate(candidate: Candidate): void {
+    this.router.navigate(['/edit-candidate', candidate._id]);
   }
 
-  deleteComment(comment: any): void {
-    // Delete comment
-    const index = this.comments.indexOf(comment);
-    if (index !== -1) {
-      this.comments.splice(index, 1);
-    }
-    console.log('Deleted comment:', comment);
+  deleteCandidate(candidateId: string): void {
+    this.candidateService.deleteCandidate(candidateId).subscribe(
+      () => {
+        this.candidates = this.candidates.filter(candidate => candidate._id !== candidateId);
+      },
+      (error) => {
+        console.error('Error deleting candidate:', error);
+      }
+    );
+  }
+
+  approveComment(comment: Comment): void {
+    // Implement your comment approval logic here
+    console.log(`Approving comment for candidate ${comment.candidateId}`);
+  }
+
+  deleteComment(comment: Comment): void {
+    if (comment._id) {
+    this.commentService.deleteComment(comment._id).subscribe(
+      () => {
+        this.comments = this.comments.filter(c => c._id !== comment._id);
+      },
+      (error) => {
+        console.error('Error deleting comment:', error);
+      }
+    );
+  }else{
+    console.error('Comment ID is undefined');
+  }
   }
 }

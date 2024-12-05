@@ -9,11 +9,13 @@ export class SortPipe implements PipeTransform {
     if (!candidates || !sortBy) {
       return candidates;
     }
-
+  
     return candidates.sort((a, b) => {
+      // Handle sorting by 'favorites' or any other property
       if (sortBy === 'favorites') {
-        return Number(b[sortBy]) - Number(a[sortBy]);  // Ascending order for favorites
+        return Number(b[sortBy]) - Number(a[sortBy]); // Descending order for favorites
       }
+      // Handle other properties (like 'name', 'party', etc.)
       if (a[sortBy] < b[sortBy]) {
         return -1;
       }
@@ -23,4 +25,5 @@ export class SortPipe implements PipeTransform {
       return 0;
     });
   }
+  
 }

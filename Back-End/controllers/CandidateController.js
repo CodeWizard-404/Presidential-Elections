@@ -1,6 +1,6 @@
 const Candidate = require('../models/Candidate');
 
-// Ajouter un candidat
+// Create a candidate
 exports.createCandidate = async (req, res) => {
   try {
     const candidate = new Candidate(req.body);
@@ -12,6 +12,7 @@ exports.createCandidate = async (req, res) => {
     res.status(500).json({ message: 'Error creating candidate', error });
   }
 };
+
 
 // Récupérer tous les candidats
 exports.getAllCandidates = async (req, res) => {

@@ -19,3 +19,7 @@ h5 {
 .container {
     padding-top: 50px;
 }
+.col-md-6,canvas{
+    margin: 0px !important;
+    padding: 0px !important;
+}

@@ -1,11 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { Candidate } from '../classes/candidate';
 
 @Pipe({
   name: 'filter'
 })
 export class FilterPipe implements PipeTransform {
 
-  transform(candidates: any[], searchTerm: string): any[] {
+  transform(candidates: Candidate[], searchTerm: string): any[] {
     if (!candidates || !searchTerm) {
       return candidates;
     }

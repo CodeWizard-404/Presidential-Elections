@@ -11,19 +11,20 @@ import { ErrorComponent } from './components/main/error/error.component';
 import { NgModule } from '@angular/core';
 import { AddCandidateComponent } from './components/admin/add-candidate/add-candidate.component';
 import { EditCandidateComponent } from './components/admin/edit-candidate/edit-candidate.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },  
   { path: 'candidates', component: CandidateListComponent },
   { path: 'candidate/:id', component: CandidateDetailsComponent },
   { path: 'results', component: ResultsComponent },
-  { path: 'admin/dashboard', component: DashboardComponent },
-  { path: 'add-candidate', component: AddCandidateComponent },
-  { path: 'edit-candidate/:id', component: EditCandidateComponent },
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: 'admin/dashboard', component: DashboardComponent, canActivate: [AuthGuard, AdminGuard] },  
+  { path: 'add-candidate', component: AddCandidateComponent, canActivate: [AuthGuard, AdminGuard] },  
+  { path: 'edit-candidate/:id', component: EditCandidateComponent, canActivate: [AuthGuard, AdminGuard] },
   { path: '**', title: 'Erreur', component: ErrorComponent }
 ];
 

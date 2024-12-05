@@ -39,15 +39,17 @@ exports.login = (req, res) => {
             bcrypt.compare(data.password, user.password, (err, valid) => {
                 if (err) return res.status(500).send('Error occurred: ' + err.message);
                 if (!valid) return res.status(400).send('Password invalid!!');
-         
+
                 let payload = {
-                    _id: user._id,
-                    email: user.email,
-                    fullname: user.name + ' ' + user.lastname,
-                    role: user.role
+                  _id: user._id,
+                  email: user.email,
+                  fullname: user.name + ' ' + user.lastname,
+                  role: user.role  // Ensure the role is included in the payload
                 };
-                let token = jwt.sign(payload, '123456789');
-                res.status(200).send({ mytoken: token });
+                
+                let token = jwt.sign(payload, '123456789');  // Use a strong secret for production
+                res.status(200).send({ mytoken: token, role: user.role, _id: user._id });  // Send token and role back
+                
             });
         })
         .catch((err) => {
@@ -68,11 +70,18 @@ exports.getUserById = async (req, res) => {
   }
 };
 
-// update user
+// Update user
 exports.updateUser = async (req, res) => {
   try {
     const updateData = { ...req.body };
 
+    // Check if password is provided and hash it before saving
+    if (updateData.password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(updateData.password, salt);
+    }
+
+    // If a file is uploaded, add the profile picture path to updateData
     if (req.file) {
       updateData.profilePicture = req.file.path; 
     }
@@ -88,3 +97,16 @@ exports.updateUser = async (req, res) => {
     res.status(500).json({ message: 'Error updating user', error });
   }
 };
+
+// Fetch all users
+exports.getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching users' });
+  }
+};
+
+
+

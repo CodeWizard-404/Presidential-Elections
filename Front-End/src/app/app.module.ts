@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -34,6 +34,7 @@ import { SortPipe } from './pipes/sort.pipe';
 // Import the RouterModule with your routes
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule, routes } from './app.routes';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 
 @NgModule({
@@ -68,10 +69,13 @@ import { AppRoutingModule, routes } from './app.routes';
     AppRoutingModule,
     Chart,
     BaseChartDirective,
+    ReactiveFormsModule
     
     
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,11 +27,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let candidate of sortedCandidates; let i = index">
+                    <tr *ngFor="let candidate of candidates; let i = index">
                         <td>{{ i + 1 }}</td>
                         <td>{{ candidate.name }}</td>
-                        <td>{{ candidate.votes }}</td>
-                        <td>{{ candidate.votePercentage | number: '1.0-2' }}%</td>
+                        <td>{{ voteCounts[candidate._id!] || 0 }}</td>
+                        <td>{{ calculatePercentage(voteCounts[candidate._id!] || 0) | number: '1.0-2' }}%</td>
                     </tr>
                 </tbody>
             </table>
