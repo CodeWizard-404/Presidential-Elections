@@ -71,7 +71,7 @@ From the **Back-End** folder, start the server:
 npm start
 ```
 
-By default, the backend will run on [http://localhost:3000](http://localhost:3005).
+By default, the backend will run on [http://localhost:3005](http://localhost:3005).
 
 ### 2. **Start the Frontend Application**
 
