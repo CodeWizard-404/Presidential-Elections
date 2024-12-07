@@ -118,7 +118,7 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ![Page Screenshot](screenshots/signup.png)
 ![Page Screenshot](screenshots/profile.png)
 ![Page Screenshot](screenshots/admin.png)
-![Page Screenshot](screenshots/addcond.png)
+![Page Screenshot](screenshots/addcondi.png)
 
 
 
