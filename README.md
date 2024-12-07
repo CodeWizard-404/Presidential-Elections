@@ -4,6 +4,7 @@ A dynamic, full-stack **online voting system** for presidential elections, built
 
 ---
 
+
 ## 🚀 **Installation and Setup**
 
 Follow the steps below to run the project locally.
