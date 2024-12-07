@@ -18,7 +18,6 @@ cd Presidential-Elections
 ### 2. **Install dependencies**
 
 #### Frontend (Angular)
-
 Navigate to the frontend directory and install the Angular dependencies:
 
 ```bash
@@ -27,7 +26,6 @@ npm install
 ```
 
 #### Backend (Node.js)
-
 Go to the backend directory and install the necessary Node.js modules:
 
 ```bash
@@ -48,7 +46,7 @@ Import your election data (e.g., candidates, voter records) from the provided **
 
 #### Example: Importing Election Data
 
-You can use **MongoDB Compass** or a script to load the JSON files.
+You can use **MongoDB Compass** or a script to load the JSON files. 
 
 In the **`Database`** section of your MongoDB setup, import the data into the appropriate collections:
 
@@ -112,17 +110,17 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 ## 📸 **Screenshots**
 
-<marquee scrollamount="10" behavior="scroll" direction="left">
-  <img src="screenshots/home.png" alt="home screenshot" width="auto" height="200px">
-  <img src="screenshots/condidate.png" alt="condidate screenshot" width="auto" height="200px">
-  <img src="screenshots/cond.png" alt="cond screenshot" width="auto" height="200px">
-  <img src="screenshots/results.png" alt="results screenshot" width="auto" height="200px">
-  <img src="screenshots/login.png" alt="login screenshot" width="auto" height="200px">
-  <img src="screenshots/signup.png" alt="signup screenshot" width="auto" height="200px">
-  <img src="screenshots/profile.png" alt="profile screenshot" width="auto" height="200px">
-  <img src="screenshots/admin.png" alt="admin screenshot" width="auto" height="200px">
-  <img src="screenshots/addcond.png" alt="addcond screenshot" width="auto" height="200px">
-</marquee>
+![Page Screenshot](screenshots/home.png)
+![Page Screenshot](screenshots/condidate.png)
+![Page Screenshot](screenshots/cond.png)
+![Page Screenshot](screenshots/results.png)
+![Page Screenshot](screenshots/login.png)
+![Page Screenshot](screenshots/signup.png)
+![Page Screenshot](screenshots/profile.png)
+![Page Screenshot](screenshots/admin.png)
+![Page Screenshot](screenshots/addcond.png)
+
+
 
 ---
 
