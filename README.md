@@ -129,8 +129,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 We welcome contributions! Feel free to fork this repository and submit pull requests. If you have any suggestions or find any bugs, open an issue!
 
----
 
-## 🧑‍💻 **Contact**
-
-For any inquiries, contact me at [my Email](mailto:sofinelaghouanem.com).
